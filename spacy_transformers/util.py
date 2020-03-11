@@ -1,6 +1,7 @@
 from typing import Union, List, Sequence, Callable, Any, Optional
 import transformers
 import numpy
+import os
 from spacy.tokens import Doc, Span
 
 from . import _tokenizers
@@ -67,7 +68,7 @@ LANG_FACTORY = "trf"
 
 def get_config(name):
     """Map a name to the appropriate transformers.*Config class."""
-    name = name.lower()
+    name = os.path.basename(name.lower())
     if name.startswith("roberta"):
         return transformers.RobertaConfig
     elif name.startswith("distilbert"):
@@ -86,7 +87,7 @@ def get_config(name):
 
 def get_model(name):
     """Map a name to the appropriate transformers.*Model class."""
-    name = name.lower()
+    name = os.path.basename(name.lower())
     if name.startswith("roberta"):
         return transformers.RobertaModel
     elif name.startswith("distilbert"):
@@ -105,7 +106,7 @@ def get_model(name):
 
 def get_tokenizer(name):
     """Get a transformers.*Tokenizer class from a name."""
-    name = name.lower()
+    name = os.path.basename(name.lower())
     if name.startswith("roberta"):
         return _tokenizers.SerializableRobertaTokenizer
     elif name.startswith("distilbert"):
