@@ -264,6 +264,7 @@ def is_class_token(text: str) -> bool:
 
 
 def get_segment_ids(name: str, *lengths) -> List[int]:
+    name = os.path.basename(name)
     if len(lengths) == 1:
         length1 = lengths[0]
         length2 = 0
